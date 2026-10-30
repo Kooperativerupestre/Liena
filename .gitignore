@@ -1,0 +1,56 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.prof
+coverage.out
+coverage.html
+
+# Build
+/bin/
+/build/
+/dist/
+/tmp/
+
+# Go workspace
+go.work
+go.work.sum
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Cache
+.cache/
+__pycache__/
+node_modules/
+
+# Docker
+postgres-data/
+volumes/
+
+# Temporary
+*.tmp
+*.bak
+*.old
+*.orig

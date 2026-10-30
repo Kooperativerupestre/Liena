@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      DB_USER: enzo
+      DB_PASSWORD: ci_password
+      DB_NAME: liena
+      TEST_DB_NAME: test_liena
+      DB_PORT: 5433
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker images
+        run: docker compose build
+
+      - name: Start database
+        run: docker compose up -d db
+
+      - name: Run Go tests
+        run: docker compose run --rm app go test -v ./...
+
+      - name: Run Go vet
+        run: docker compose run --rm app go vet ./...
+
+      - name: Stop containers
+        if: always()
+        run: docker compose down -v
